@@ -6,7 +6,7 @@ import time
 from bs4 import BeautifulSoup
 
 
-#LOOK FOR OTHER CAPITALIZED COMMENTS - incorporate earnings days (disclude) - BID ASK AS A PERCENTAGE
+#TODO: incorporate earnings days (disclude), acount for bid/ask differential as a percentage of the total stock price
 
 
 
@@ -811,22 +811,20 @@ def backtest(sym1, sym2, interval, month, z_score, stop_loss , balance, look_bac
 
 
 if __name__ == "__main__":
-    #becase of lqdty, need to do many at once - also acont fo slppge and ave bd-ask
-    #have something that allows you to change parameters and re run the backtest before deleting the files
+    #TODO: have something that allows you to change parameters and re run the backtest before deleting the files
    
     print("Analyzing and backtesting stock/ETF pairs")
     print()
     sym1 = input("Enter ticker 1: ").upper()
     sym2 = input("Enter ticker 2: ").upper()
-    month = input("Enter month (YYYY-MM): ") #WILL DO MULTIPLE EVENTUALLY
-    look_back = int(input("Enter # months to base stats on: ")) #so if this were 3, for each date we would do the stdev, regression calculation based on the past 3 months
+    month = input("Enter month (YYYY-MM): ")
+    look_back = int(input("Enter # months to base stats on: ")) #if this were 3, for each date we would do the stdev, regression calculation based on the past 3 months
     interval = input("Enter interval (1min, 5min, 15min, 30min, 60min): ")
     backtestYN = input("Backtest this pair? (Y/N): ").upper()
     values = looper(sym1, sym2, interval, month, look_back)
     ave_val_sym1 = values[0]
     ave_val_sym2 = values[1]
     ratio = ave_val_sym1/ave_val_sym2
-    #Make it compatible with multiple symbols, then make a class for each symbol?
     stdev = values[2]
     r = values[3]
     print()
